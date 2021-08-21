@@ -93,25 +93,31 @@
 
             $('#btnBorrar').click(function () {//ELIMINAR ALUMNO
                 var AlumnoID = $('#txtAlumnoID').val();
-
-                $.ajax({
-                    type: "POST",
-                    url: "Alumnos.aspx/Delete",
-                    data: '{AlumnoID:' + '"' + AlumnoID + '"}',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: 'json',
-                    async: false,
-                    success: function (data) {
-                        if (data.d != 1) {
-                            swal("Error", data.d, "error");
-                        }
-                        else {
-                            swal("Eliminado", "Sus datos han sido borrados correctamente!", "success");
-                            Datos();
-                        }
-                    },
-                    failure: onFailure
-                });
+                if (AlumnoID != "")
+                {
+                    $.ajax({
+                        type: "POST",
+                        url: "Alumnos.aspx/Delete",
+                        data: '{AlumnoID:' + '"' + AlumnoID + '"}',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: 'json',
+                        async: false,
+                        success: function (data) {
+                            if (data.d != 1) {
+                                swal("Error", data.d, "error");
+                            }
+                            else {
+                                swal("Eliminar", "Sus datos han sido borrados correctamente!", "success");
+                                Datos();
+                            }
+                        },
+                        failure: onFailure
+                    });
+                }
+                else {
+                    swal("Eliminar", "Favor de seleccionar un alumno primero.", "warning");
+                }
+                
                 function onFailure(e) {
                     swal("Error", e.get_message(), "error");
                 }

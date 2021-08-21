@@ -39,22 +39,20 @@ public partial class Login : System.Web.UI.Page
                     {
                         string Nombre = T.Rows[0]["Name"].ToString() + " " + T.Rows[0]["Lastname"].ToString();
 
-                        //HttpContext Context = HttpContext.Current;
-                        //HttpCookie userInfo = new HttpCookie("UserInfo");
-                        //userInfo["UserName"] = T.Rows[0]["UserName"].ToString();
-                        //userInfo["Name"] = Nombre;
-                        //userInfo["Rol"] = T.Rows[0]["IDRol"].ToString();
+                        HttpContext Context = HttpContext.Current;
+                        HttpCookie userInfo = new HttpCookie("UserInfo");
+                        userInfo["Name"] = T.Rows[0]["Name"].ToString();
+                        userInfo["Name"] = Nombre;
+                        userInfo["Rol"] = T.Rows[0]["RolID"].ToString();
 
-                        //userInfo.Expires = DateTime.Now.AddDays(1d);
-                        //Context.Response.Cookies.Add(userInfo);
-
+                        userInfo.Expires = DateTime.Now.AddDays(1d);
+                        Context.Response.Cookies.Add(userInfo);
 
                         return "1," + T.Rows[0]["Username"].ToString() + "," + Nombre;
                     }
                     else if (T.Rows[0]["RolID"].ToString() == "2")
                     {
                         string Nombre = T.Rows[0]["Name"].ToString() + " " + T.Rows[0]["Lastname"].ToString();
-                        //Session["Usuario"] = T.Rows[0]["FirstName"].ToString() + T.Rows[0]["LastName"].ToString();
                         return "2," + T.Rows[0]["Username"].ToString() + "," + Nombre;
                     }
                 }

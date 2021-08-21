@@ -10,6 +10,7 @@ public partial class Admin_Administrator : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
     }
 
     protected void lblCerrarSesion_Click(object sender, EventArgs e)
